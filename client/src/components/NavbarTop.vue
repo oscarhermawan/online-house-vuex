@@ -6,8 +6,8 @@
           <a class="nav-item">
             <img src="http://bulma.io/images/bulma-logo.png" alt="Bulma logo">
           </a>
-          <a class="nav-item is-tab is-hidden-mobile is-active">Home</a>
-          <a class="nav-item is-tab is-hidden-mobile">Sell Your House</a>
+          <a class="nav-item is-tab is-hidden-mobile is-active"><router-link :to="{ path: '/' }">Home</router-link></a>
+          <a class="nav-item is-tab is-hidden-mobile"><router-link :to="{ path: '/sellhouse' }">Sell Your House</router-link></a>
         </div>
         <span class="nav-toggle">
           <span></span>

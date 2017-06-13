@@ -17,7 +17,7 @@
                   <br>
                   {{house.description}}
                   <br><br>
-                  <a class="button is-primary">Edit</a>
+                  <a class="button is-primary" @click="editHouse(house)">Edit</a>
                   <a class="button is-danger" @click="deleteHouse(house)">Delete</a>
                 </p>
               </div>
@@ -52,6 +52,12 @@ export default{
       this.$store.dispatch('DELETE_HOUSE', { deleteHouse : house })
       .then(response=>{
         // this.$router.push('/')
+      })
+    },
+    editHouse(house){
+      this.$router.push({
+        name:'updateHouse',
+        params: { id: house._id}
       })
     }
   },
