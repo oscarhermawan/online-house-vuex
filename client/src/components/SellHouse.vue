@@ -3,16 +3,27 @@
     <navbartop></navbartop>
     </br>
       <div class="columns">
-        <div class="column is-one-quarter">
-          <p class="notification is-info">
-            <code class="html">is-one-quarter</code>
-          </p>
+        <div class="column is-half">
+          <gmap-map
+          :center="location"
+          :zoom="12"
+          @click="clickMap()"
+          style="width: 100%; height: 100%"
+        >
+          <gmap-marker
+            :position="location"
+            :clickable="true"
+            :draggable="true"
+            @g-click="marker"
+          ></gmap-marker>
+        </gmap-map>
+
+        {{ location }}
         </div>
 
         <div class="column">
           SELL YOUR HOUSE FOR BETTER FUTURE
           <br><br>
-
           <div class="field">
             <label class="label">Title</label>
             <p class="control">
@@ -53,16 +64,33 @@
           <a class="button is-success" @click="addHouse">Sell</a>
           <a class="button is-info">Cancel :(</a>
         </div>
+
+
       </div>
   </div>
 </template>
 
 <script>
+
+
+import {mapState} from 'vuex'
+import * as VueGoogleMaps from 'vue2-google-maps';
 import NavbarTop from './NavbarTop'
+import Vue from 'vue'
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: 'AIzaSyALtlGkqr4ldte61-e8jgowNbT92Ol6ZI4',
+    v: 'OPTIONAL VERSION NUMBER',
+  }
+});
 
 export default{
   data(){
     return{
+      location:{
+        lat:'',
+        lng:''
+      },
       newHouse:{
         title:'',
         description:'',
@@ -82,6 +110,20 @@ export default{
       .then(response=>{
         this.$router.push('/')
       })
+    },
+    clickMap(){
+      this.location.lat = -7.0
+      this.location.lng = 107
+    }
+  },
+  computed: {
+    marker() {
+      console.log('hasil', typeof this.$store.getters.getLocation.lat);
+      console.log('hasil', typeof this.$store.getters.getLocation.lng);
+      this.location.lat = this.$store.getters.getLocation.lat;
+      this.location.lng = this.$store.getters.getLocation.lng;
+      // return this.$store.getters.getLocation
+
     }
   }
 }

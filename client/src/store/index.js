@@ -5,6 +5,8 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state:{
+    center: {lat: -6.2, lng: 106.85},
+    // markers:{position: {lat: -6.2, lng: 106.85s}},
     houses:[]
   },
   actions:{
@@ -63,6 +65,9 @@ const store = new Vuex.Store({
   getters:{
     getHouses:state => {
       return state.houses.filter(houses => !houses.completed)
+    },
+    getLocation:state =>{
+      return state.center
     }
   }
 })
